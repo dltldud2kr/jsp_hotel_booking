@@ -2,13 +2,21 @@
 <%@ page import="java.util.*, room.*"%>
 
 <jsp:useBean id="RoomMgrP" class="room.RoomMgr" scope="page"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
 <html>
 <head> 
 <title>객실 리스트</title>
-<script src="https://cdn.tailwindcss.com"></script>
+
 
 <style>
+@import
+	url('https://fonts.googleapis.com/css2?family=YouTube+Sans:wght@400;500;600;700;800&display=swap')
+	;
+
+* {
+	font-family: 'YouTube Sans', sans-serif;
+}
 .card {
 	width: 80%;
 	margin: 100px auto;
@@ -36,36 +44,51 @@
 }
 </style>
 </head>
-<body class="bg-gray-100">
-<div class="container mx-auto py-10">
-<h2 class="text-2xl font-bold text-center mb-6">객실 리스트</h2>
+<body class="bg-light">
+<jsp:include page="/header.jsp"/>
+<div class="container py-5">
+<h2 class="text-center mb-4">객실 리스트</h2>
+<%
+	String startDate = request.getParameter("start-date");
+	String endDate = request.getParameter("end-date");
+	String people = request.getParameter("people");
+%>
+<%=startDate %>
+<%=endDate %>
 <%
 	Vector<RoomBean> vlist = RoomMgrP.getRoomList();
 	int counter = vlist.size();
 	for(int i=0; i<vlist.size(); i++){
    		RoomBean RoomList = vlist.get(i);
 %>
-<div class="flex mb-4 card">
-	<div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5">
-		<div>
-			<img src="/MaNolja/img/<%=RoomList.getRoom_title()%>1.jpg" alt="배치도">
+<div class="card mb-3">
+	<div class="row no-gutters">
+		<div class="col-md-4">
+			<img src="/MaNolja/img/<%=RoomList.getRoom_title()%>1.jpg" class="card-img" alt="사진">
 		</div>
-	</div>
-	<div class="w-full sm:w-1/2 md:w-2/3 lg:w-3/4 xl:w-4/5 content">
-		<h4 class="font-bold text-2xl mb-2"><%=RoomList.getRoom_title()%></h4>
-		<p class="text-gray-700 text-sm mb-2"><%=RoomList.getRoom_detail()%></p>
-		<p class="text-gray-700 text-sm mb-2"><%=RoomList.getRoom_area()%>㎡</p>
-		<p class="text-red-500 font-bold text-lg mb-4">₩ <%=RoomList.getRoom_price()%></p>
-		<form action="/MaNolja/room/roomdetail.jsp?room_id=<%=RoomList.getRoom_idx() %>" method="GET" name="detail">
-		<input type="hidden" value="<%=RoomList.getRoom_idx()%>" name="room_id">
-		<button class="bg-red-500 text-white px-4 py-2 rounded-lg" onClick="submit">자세히보기</button>
-		</form>
+		<div class="col-md-8">
+			<div class="card-body">
+				<h5 class="card-title"><%=RoomList.getRoom_title()%></h5>
+				<p class="card-text"><%=RoomList.getRoom_detail()%></p>
+				<p class="card-text"><small class="text-muted"><%=RoomList.getRoom_area()%>㎡</small></p>
+				<p class="card-text text-danger"><%=RoomList.getRoom_price()%>원</p>
+				<form action="/MaNolja/room/roomdetail.jsp?room_id=<%=RoomList.getRoom_idx()%>" method="GET" name="detail">
+				<input type="hidden" value="<%=RoomList.getRoom_idx()%>" name="room_id">
+				<input type="hidden" value="<%=startDate%>" name="start_date">
+				<input type="hidden" value="<%=endDate%>" name="end_date">
+				<input type="hidden" value="<%=people%>" name="people">
+				<button class="btn btn-danger">자세히보기</button>
+				</form>
+			</div>
+		</div>
 	</div>
 </div>
 <%
    }
 %>
-<h2 class="text-2xl text-center mt-6">총 객실 수: <%= counter %></h2>
+<h2 class="text-center mt-4">총 객실 수: <%= counter %></h2>
+<jsp:include page="/footer.jsp"/>
 </div>
 </body>
+
 </html>

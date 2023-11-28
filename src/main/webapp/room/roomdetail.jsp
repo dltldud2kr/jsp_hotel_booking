@@ -8,21 +8,19 @@
 <head>
 <meta charset="UTF-8">
 <title>방 자세히 보기</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
 <style>
-@import
-	url('https://fonts.googleapis.com/css2?family=YouTube+Sans:wght@400;500;600;700;800&display=swap')
-	;
+@import url('https://fonts.googleapis.com/css2?family=YouTube+Sans:wght@400;500;600;700;800&display=swap');
 
 * {
 	font-family: 'YouTube Sans', sans-serif;
 }
 
 .carousel {
-	maring-top: 2vh;
+	margin-top: 2vh;
 	margin: 0 auto;
 	overflow: hidden;
 	justify-content: center;
@@ -92,173 +90,197 @@
 .flatpickr-calendar {
 	z-index: 99 !important;
 }
+
+.img-fluid {
+	width: 5vh;
+	height: 5vh;
+}
+.grid-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+/* Styles for screens with a maximum width of 767px (mobile) */
+@media (max-width: 767px) {
+    .grid-details {
+        grid-template-columns: repeat(3, 1fr); /* 3 columns on mobile */
+    }
+}
+
+/* Styles for screens with a minimum width of 768px (tablet and above) */
+@media (min-width: 768px) {
+    .grid-details {
+        grid-template-columns: repeat(6, 1fr); /* 6 columns on tablet and above */
+    }
+}
 </style>
+	<%
+	String start_date = request.getParameter("start_date");
+	String end_date = request.getParameter("end_date");
+	String people = request.getParameter("people");
+	%>
 <script>
-	window
-			.addEventListener(
-					'DOMContentLoaded',
-					function() {
-						var items = document
-								.querySelectorAll('.carousel__item');
-						var prevBtn = document.querySelector('.prev');
-						var nextBtn = document.querySelector('.next');
-						var index = 0;
+window.addEventListener('DOMContentLoaded', function() {
+	var items = document.querySelectorAll('.carousel__item');
+	var prevBtn = document.querySelector('.prev');
+	var nextBtn = document.querySelector('.next');
+	var index = 0;
 
-						function updateCarousel() {
-							items
-									.forEach(function(item, i) {
-										item.classList.toggle(
-												'carousel__item--visible',
-												i === index);
-									});
-						}
+	function updateCarousel() {
+		items.forEach(function(item, i) {
+			item.classList.toggle('carousel__item--visible', i === index);
+		});
+	}
 
-						prevBtn.addEventListener('click', function() {
-							index = (index - 1 + items.length) % items.length;
-							updateCarousel();
-						});
+	prevBtn.addEventListener('click', function() {
+		index = (index - 1 + items.length) % items.length;
+		updateCarousel();
+	});
 
-						nextBtn.addEventListener('click', function() {
-							index = (index + 1) % items.length;
-							updateCarousel();
-						});
+	nextBtn.addEventListener('click', function() {
+		index = (index + 1) % items.length;
+		updateCarousel();
+	});
 
-						updateCarousel();
-						setInterval(function() {
-							index = (index + 1) % items.length;
-							updateCarousel();
-						}, 3000);
+	updateCarousel();
+	setInterval(function() {
+		index = (index + 1) % items.length;
+		updateCarousel();
+	}, 3000);
 
-				        // Flatpickr 설정
-				        var fp = flatpickr("#datePickerBtn", {
-				            mode: "range",
-				            dateFormat: "Y-m-d",
-				            onChange: function(selectedDates, dateStr, instance) {
-				                if (selectedDates.length === 2) {
-				                    var start = instance.formatDate(selectedDates[0], "Y-m-d");
-				                    var end = instance.formatDate(selectedDates[1], "Y-m-d");
+	// Flatpickr 설정
+	var fp = flatpickr("#datePickerBtn", {
+		mode: "range",
+		dateFormat: "Y-m-d",
+		onChange: function(selectedDates, dateStr, instance) {
+			if (selectedDates.length === 2) {
+				var start = instance.formatDate(selectedDates[0], "Y-m-d");
+				var end = instance.formatDate(selectedDates[1], "Y-m-d");
 
-				                    // 날짜를 hidden input 요소에 설정
-				                    document.getElementById('startDate').value = start;
-				                    document.getElementById('endDate').value = end;
+				// 날짜를 hidden input 요소에 설정
+				document.getElementById('startDate').value = start;
+				document.getElementById('endDate').value = end;
 
-				                    // 날짜를 버튼의 텍스트로 설정
-				                    document.getElementById('datePickerBtn').textContent = start + ' - ' + end;
+				// 날짜를 버튼의 텍스트로 설정
+				document.getElementById('datePickerBtn').textContent = start + ' - ' + end;
 
-				                    instance.close();
-				                }
-				            }
-				        });
+				instance.close();
+			}
+		},
+		defaultDate: [<%= start_date == null ? "null" : "\"" + start_date + "\"" %>, <%= end_date == null ? "null" : "\"" + end_date + "\"" %>]
+	});
 
-				        document.getElementById('datePickerBtn').addEventListener('click', function() {
-				            fp.open();
-				        });
-					});
+	document.getElementById('datePickerBtn').addEventListener('click', function() {
+		fp.open();
+	});
+	
+	// 인원 선택 드롭다운 메뉴 설정
+	var peopleSelect = document.getElementById('peopleSelect');
+	peopleSelect.value = "<%= people == null ? "" : people %>";
+	peopleSelect.addEventListener('change', function() {
+		document.getElementById('people').value = this.value;
+	});
+});
 </script>
-
-
 </head>
-<body class="bg-gray-100">
+<body class="bg-light">
+	<jsp:include page="/header.jsp" />
 	<%
 	int room_id = Integer.parseInt(request.getParameter("room_id"));
 	Vector<RoomBean> vinfo = RoomMgr.getRoominfo(room_id);
 	RoomBean RoomList = vinfo.get(0);
 	String[] details = RoomList.getRoom_detail().split("\\|");
 	%>
-	<div class="carousel mt-2 border-2 border-gray-200 rounded-lg relative">
-		<img class="carousel__item carousel__item--visible"
-			src="/MaNolja/img/<%=RoomList.getRoom_title()%>1.jpg" alt="객실 사진">
-		<img class="carousel__item"
-			src="/MaNolja/img/<%=RoomList.getRoom_title()%>2.jpg" alt="객실사진2">
-		<img class="carousel__item"
-			src="/MaNolja/img/<%=RoomList.getRoom_title()%>3.jpg" alt="객실사진3">
-		<button class="prev absolute top-1/2 left-2 bg-white p-2 rounded-full">
-			<svg xmlns="http://www.w3.org/2000/svg" fill="none"
-				viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-  			<path stroke-linecap="round" stroke-linejoin="round"
-					stroke-width="2" d="M15 19l-7-7 7-7" />
-			</svg>
-		</button>
-		<button
-			class="next absolute top-1/2 right-2 bg-white p-2 rounded-full">
-			<svg xmlns="http://www.w3.org/2000/svg" fill="none"
-				viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-  			<path stroke-linecap="round" stroke-linejoin="round"
-					stroke-width="2" d="M9 5l7 7-7 7" />
-			</svg>
-		</button>
-	</div>
 
-	<div class="container mx-auto py-10">
-		<div class="flex justify-between items-center mb-4">
-			<h2 class="text-3xl font-bold text-gray-800"><%=RoomList.getRoom_title()%></h2>
-			<div class="flex items-center">
-				<button id="datePickerBtn"
-					class="border-2 border-gray-300 rounded-md px-3 py-2 mr-3">입실/퇴실
-					날짜 선택</button>
-					<form action="/MaNolja/check/check.jsp" method="get">
-				    <input type="hidden" name="room_id" value="<%=RoomList.getRoom_idx()%>">
-				    <input type="hidden" id="startDate" name="start_date">
-				    <input type="hidden" id="endDate" name="end_date">
-				    <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-lg">예약하기</button>
-				</form>
-			</div>
-		</div>
-		<p class="text-2xl text-red-500 font-bold mb-4">
-			<strong>₩</strong>
-			<%=RoomList.getRoom_price()%>
+<div class="carousel mt-2 border-2 border-gray-200 rounded-lg" style="position: relative;">
+    <img class="carousel__item carousel__item--visible"
+        src="/MaNolja/img/<%=RoomList.getRoom_title()%>1.jpg" alt="객실 사진">
+    <img class="carousel__item"
+        src="/MaNolja/img/<%=RoomList.getRoom_title()%>2.jpg" alt="객실사진2">
+    <img class="carousel__item"
+        src="/MaNolja/img/<%=RoomList.getRoom_title()%>3.jpg" alt="객실사진3">
+    <button class="prev" style="position: absolute; top: 48%; right: 10px; background: transparent; padding: 10px; border: none;">
+        <img src="https://cdn-icons-png.flaticon.com/512/271/271228.png" alt="Previous" style="width: 24px; height: 24px;">
+    </button>
+    <button class="next" style="position: absolute; top: 48%; left: 10px; background: transparent; padding: 10px; border: none;">
+        <img src="https://cdn-icons-png.flaticon.com/512/271/271228.png" alt="Next" style="width: 24px; height: 24px; transform: rotate(180deg);">
+    </button>
+</div>
+	<div class="container my-5">
+<div class="d-flex align-items-center justify-content-end">
+	<button id="datePickerBtn" class="btn btn-outline-secondary mr-3">
+		<%= start_date != null && end_date != null ? start_date + " - " + end_date : "입실/퇴실 날짜 선택" %>
+	</button>
+	<select id="peopleSelect" class="btn btn-outline-secondary mr-3">
+		<option selected>인원 선택</option>
+		<option value="1">1명</option>
+		<option value="2">2명</option>
+		<option value="3">3명</option>
+		<option value="4">4명</option>
+		<!-- 필요한 만큼 옵션을 추가하세요 -->
+	</select>
+	<form action="/MaNolja/check/check.jsp" method="get">
+		<input type="hidden" name="room_id" value="<%=RoomList.getRoom_idx()%>">
+		<input type="hidden" id="startDate" name="start_date">
+		<input type="hidden" id="endDate" name="end_date">
+		<input type="hidden" id="people" name="people">
+		<button type="submit" class="btn btn-danger">예약하기</button>
+	</form>
+</div>
+
+		<p class="text-danger h4 mb-4">
+			₩ <%=RoomList.getRoom_price()%>
 		</p>
-		<div class="grid-info">
-			<div>
+		<div class="row">
+			<div class="col-md-6">
 				<p>
-					<strong>객실 인원:</strong>
-					<%=RoomList.getRoom_people()%>명
+					<strong>객실 인원:</strong> <%=RoomList.getRoom_people()%>명
 				</p>
 				<p>
-					<strong>객실 면적:</strong>
-					<%=RoomList.getRoom_area()%></p>
+					<strong>객실 면적:</strong> <%=RoomList.getRoom_area()%>
+				</p>
 			</div>
-			<div>
+			<div class="col-md-6">
 				<p>
-					<strong>배치:</strong>
-					<%=RoomList.getRoom_map()%></p>
+					<strong>배치:</strong> <%=RoomList.getRoom_map()%>
+				</p>
 				<p>
-					<strong>객실 수:</strong>
-					<%=RoomList.getRoom_num()%>개
+					<strong>객실 수:</strong> <%=RoomList.getRoom_num()%>개
 				</p>
 			</div>
 		</div>
-		<div class="grid-details">
-			<%
-			int counter = 1;
-			for (String detail : details) {
-			%>
-			<div class="icon_div">
-				<img src="/MaNolja/img/icon_service0<%=counter%>.svg"
-					alt="<%=detail.trim()%>">
-				<p><%=detail.trim()%></p>
-			</div>
-			<%
-			counter++;
-			}
-			%>
+		<div class="row">
+		    <%
+		    int counter = 1;
+		    for (String detail : details) {
+		    %>
+		    <div class="col-4 col-md-2 text-center">
+		        <img src="/MaNolja/img/icon_service0<%=counter%>.svg" class="img-fluid mx-auto d-block" alt="<%=detail.trim()%>">
+		        <p><%=detail.trim()%></p>
+		    </div>
+		    <%
+		    counter++;
+		    }
+		    %>
 		</div>
-		<div class="guide_txt">
+		<div class="bg-light p-4 mt-3">
 			<h3>
 				<strong>이용안내:</strong>
 			</h3>
-			<ul>
-				<li class="list-style-none guide_li"><%=RoomList.getRoom_guide()%></li>
-				<li>예약 및 문의는 053)602-7173으로 문의 바랍니다.</li>
-				<li>반려동물 동반투숙이 불가합니다.(장애인 안내견 제외)</li>
-				<li>전 객실 금연입니다.</li>
-			</ul>
-		</div>
-		<div class="md:col-span-3 text-right mt-3">
-			<p>
-				<strong>등록일:</strong>
-				<%=RoomList.getCreated_at()%></p>
-		</div>
-	</div>
+			<ul class="list-unstyled">
+                <li><%=RoomList.getRoom_guide()%></li>
+                <li>예약 및 문의는 053)602-7173으로 문의 바랍니다.</li>
+                <li>반려동물 동반투숙이 불가합니다.(장애인 안내견 제외)</li>
+                <li>전 객실 금연입니다.</li>
+            </ul>
+        </div>
+        <div class="row mt-3 text-right">
+            <p class="col-md-9">
+                <strong>등록일:</strong> <%=RoomList.getCreated_at()%>
+            </p>
+        </div>
+        <jsp:include page="/footer.jsp" />
+    </div>
 </body>
 </html>

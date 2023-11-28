@@ -1,0 +1,126 @@
+.carousel-item {
+	position: relative;
+}
+
+.carousel-item img {
+	height: 500px;
+	object-fit: cover;
+}
+
+.carousel-caption {
+	position: absolute !important;
+	top: 50% !important;
+	bottom: 2% !important;
+	left: 50% !important;
+	transform: translate(-50%, -50%) !important;
+	color: #fff;
+	background: rgba(0, 0, 0, 0.5);
+	border: 1px solid #fff;
+}
+
+.carousel-caption h3 {
+	font-size: 60px !important;
+}
+
+.carousel-caption p {
+	font-size: 15px !important;
+}
+
+.search-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px; /* 媛꾧꺽�� �먰븯�� �ш린濡� �ㅼ젙�섏꽭�� */
+}
+
+.search-form .form-group {
+  flex-basis: 25%; /* 4�대줈 諛곗튂�섍린 �꾪빐 1/4 �ш린濡� �ㅼ젙 */
+}
+
+
+.date-input {
+	width: 100%;
+	padding: 0.5em;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+.btn {
+	background-color: #007bff;
+	color: white;
+	border: none;
+	padding: 0.5em 1em;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+}
+
+.input-group {
+	display: flex;
+}
+
+.input-group button {
+	margin-left: 1em;
+}
+
+select#people {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background: #fff;
+  font-size: 16px;
+}
+.card-container {
+  display: flex;
+  justify-content: center;
+  gap: 100px; /* 移대뱶 �ъ씠�� 媛꾧꺽�� �먰븯�� �ш린濡� �ㅼ젙�섏꽭�� */
+
+}
+
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 20px;
+  width: 300px; /* �먰븯�� 媛�濡� �덈퉬濡� �ㅼ젙�섏꽭�� */
+}
+
+.card-container h2 {
+  text-align: center; /* 媛��대뜲 �뺣젹 */
+  font-size: 24px; /* �먰븯�� 湲��� �ш린 */
+  /* 異붽��곸씤 �ㅽ��쇱쓣 �ш린�� 異붽��섏꽭�� */
+}
+
+.card-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 15px;
+  display: flex;
+}
+
+.card-title {
+  margin: 0;
+  padding-bottom: 10px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.card-desc {
+  margin: 0;
+  font-size: 16px;
+}
+
+h2{
+	text-align: center;
+	font-size: 24px; /* �먰븯�� 湲��� �ш린 */
+
+}
