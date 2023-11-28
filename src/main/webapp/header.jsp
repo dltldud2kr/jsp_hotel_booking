@@ -22,7 +22,7 @@
           <a class="nav-link text-dark" id="loginLink" href="<%=request.getContextPath() %>/Member/login.jsp">Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark" id="signinLink" href="<%=request.getContextPath() %>/Member/signin.jsp">Sign in</a>
+          <a class="nav-link text-dark" id="signinLink" href="<%=request.getContextPath() %>/Member/member.jsp">Sign in</a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-dark" id="roomLink" href="<%=request.getContextPath() %>/room/roomlist.jsp">Room</a>
