@@ -92,8 +92,8 @@
 }
 
 .img-fluid {
-	width: 5vh;
-	height: 5vh;
+	width: 35px;
+	height: 35px;
 }
 .grid-details {
     display: grid;
@@ -116,6 +116,7 @@
 }
 </style>
 	<%
+	request.setCharacterEncoding("utf-8");
 	String start_date = request.getParameter("start_date");
 	String end_date = request.getParameter("end_date");
 	String people = request.getParameter("people");
@@ -197,6 +198,8 @@ window.addEventListener('DOMContentLoaded', function() {
 			alert("로그인을 해주세요.");
 		<% } %>
 	});
+	
+
 });
 </script>
 </head>
@@ -243,9 +246,8 @@ window.addEventListener('DOMContentLoaded', function() {
 		<button type="button" id="reservationBtn" class="btn btn-danger">예약하기</button>
 	</form>
 </div>
-
-		<p class="text-danger h4 mb-4">
-			₩ <%=RoomList.getRoom_price()%>
+		<p class="text-danger h4 mb-4"><%=RoomList.getRoom_price()%>
+			₩ <%=RoomList.getRoom_price() %>
 		</p>
 		<div class="row">
 			<div class="col-md-6">

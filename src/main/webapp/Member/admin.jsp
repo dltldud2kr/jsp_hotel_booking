@@ -10,7 +10,7 @@
 
 	<h4>관리자 페이지</h4>
 	
-	<a href="admin_memberInfo">회원 관리</a>
+	<a href="admin_memberInfo.jsp">회원 관리</a>
 	
 	
 </body>
