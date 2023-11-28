@@ -9,6 +9,9 @@
 <meta charset="UTF-8">
 <title>방 자세히 보기</title>
 <script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <style>
 @import
 	url('https://fonts.googleapis.com/css2?family=YouTube+Sans:wght@400;500;600;700;800&display=swap')
@@ -86,37 +89,71 @@
 	font-size: 15px;
 }
 
-
+.flatpickr-calendar {
+	z-index: 99 !important;
+}
 </style>
 <script>
-	window.addEventListener('DOMContentLoaded', function() {
-		var items = document.querySelectorAll('.carousel__item');
-		var prevBtn = document.querySelector('.prev');
-		var nextBtn = document.querySelector('.next');
-		var index = 0;
+	window
+			.addEventListener(
+					'DOMContentLoaded',
+					function() {
+						var items = document
+								.querySelectorAll('.carousel__item');
+						var prevBtn = document.querySelector('.prev');
+						var nextBtn = document.querySelector('.next');
+						var index = 0;
 
-		function updateCarousel() {
-			items.forEach(function(item, i) {
-				item.classList.toggle('carousel__item--visible', i === index);
-			});
-		}
+						function updateCarousel() {
+							items
+									.forEach(function(item, i) {
+										item.classList.toggle(
+												'carousel__item--visible',
+												i === index);
+									});
+						}
 
-		prevBtn.addEventListener('click', function() {
-			index = (index - 1 + items.length) % items.length;
-			updateCarousel();
-		});
+						prevBtn.addEventListener('click', function() {
+							index = (index - 1 + items.length) % items.length;
+							updateCarousel();
+						});
 
-		nextBtn.addEventListener('click', function() {
-			index = (index + 1) % items.length;
-			updateCarousel();
-		});
+						nextBtn.addEventListener('click', function() {
+							index = (index + 1) % items.length;
+							updateCarousel();
+						});
 
-		updateCarousel();
-		setInterval(function() {
-			index = (index + 1) % items.length;
-			updateCarousel();
-		}, 3000);
-	});
+						updateCarousel();
+						setInterval(function() {
+							index = (index + 1) % items.length;
+							updateCarousel();
+						}, 3000);
+
+				        // Flatpickr 설정
+				        var fp = flatpickr("#datePickerBtn", {
+				            mode: "range",
+				            dateFormat: "Y-m-d",
+				            onChange: function(selectedDates, dateStr, instance) {
+				                if (selectedDates.length === 2) {
+				                    var start = instance.formatDate(selectedDates[0], "Y-m-d");
+				                    var end = instance.formatDate(selectedDates[1], "Y-m-d");
+
+				                    // 날짜를 hidden input 요소에 설정
+				                    document.getElementById('startDate').value = start;
+				                    document.getElementById('endDate').value = end;
+
+				                    // 날짜를 버튼의 텍스트로 설정
+				                    document.getElementById('datePickerBtn').textContent = start + ' - ' + end;
+
+				                    instance.close();
+				                }
+				            }
+				        });
+
+				        document.getElementById('datePickerBtn').addEventListener('click', function() {
+				            fp.open();
+				        });
+					});
 </script>
 
 
@@ -136,25 +173,41 @@
 		<img class="carousel__item"
 			src="/MaNolja/img/<%=RoomList.getRoom_title()%>3.jpg" alt="객실사진3">
 		<button class="prev absolute top-1/2 left-2 bg-white p-2 rounded-full">
-			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-  			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+			<svg xmlns="http://www.w3.org/2000/svg" fill="none"
+				viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+  			<path stroke-linecap="round" stroke-linejoin="round"
+					stroke-width="2" d="M15 19l-7-7 7-7" />
 			</svg>
 		</button>
-		<button class="next absolute top-1/2 right-2 bg-white p-2 rounded-full">
-			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-  			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+		<button
+			class="next absolute top-1/2 right-2 bg-white p-2 rounded-full">
+			<svg xmlns="http://www.w3.org/2000/svg" fill="none"
+				viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+  			<path stroke-linecap="round" stroke-linejoin="round"
+					stroke-width="2" d="M9 5l7 7-7 7" />
 			</svg>
 		</button>
 	</div>
 
-<div class="container mx-auto py-10">
-    <div class="flex justify-between items-center mb-4">
-        <h2 class="text-3xl font-bold"><%=RoomList.getRoom_title()%></h2>
-        <a href="/MaNolja/check/check.jsp?room_id=<%=RoomList.getRoom_idx() %>" class="bg-red-500 text-white px-4 py-2 rounded-lg">예약하기</a>
-    </div>
-    <p class="text-2xl text-red-500 font-bold mb-4">
-        <strong>₩</strong> <%=RoomList.getRoom_price()%>
-    </p>
+	<div class="container mx-auto py-10">
+		<div class="flex justify-between items-center mb-4">
+			<h2 class="text-3xl font-bold text-gray-800"><%=RoomList.getRoom_title()%></h2>
+			<div class="flex items-center">
+				<button id="datePickerBtn"
+					class="border-2 border-gray-300 rounded-md px-3 py-2 mr-3">입실/퇴실
+					날짜 선택</button>
+					<form action="/MaNolja/check/check.jsp" method="get">
+				    <input type="hidden" name="room_id" value="<%=RoomList.getRoom_idx()%>">
+				    <input type="hidden" id="startDate" name="start_date">
+				    <input type="hidden" id="endDate" name="end_date">
+				    <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-lg">예약하기</button>
+				</form>
+			</div>
+		</div>
+		<p class="text-2xl text-red-500 font-bold mb-4">
+			<strong>₩</strong>
+			<%=RoomList.getRoom_price()%>
+		</p>
 		<div class="grid-info">
 			<div>
 				<p>
