@@ -49,7 +49,6 @@ th {
 <body>
 
 	<h2>BOOKING</h2>
-	<div><h3>예약 정보</h3></div>
 
 	<%
 	// 폼에서 전송된 파라미터 값을 얻어옴
@@ -68,7 +67,7 @@ th {
 	reservationBean.setEnd_date(enddate);
 	reservationBean.setStart_date(startdate);
 	reservationBean.setRoom_idx(room_idx);
-	reservationBean.setResev_price(room_price);
+	reservationBean.setRoom_price(room_idx);
 	reservationBean.setPeople(people);
 	reservationBean.setMem_idx(mem_idx);
 	
@@ -84,10 +83,10 @@ th {
 	<div class="table-container">
 		<table>
 			<tr>
-				<th>체크인</th>
-				<th>방 번호</th>
-				<th>예약금액</th>
-				<th>인원</th>
+				<th>Date</th>
+				<th>Room Index</th>
+				<th>Room Price</th>
+				<th>Room People</th>
 
 			</tr>
 			<tr>
@@ -99,16 +98,10 @@ th {
 			</tr>
 		</table>
 
-		
-	</div>
-	
-	<div class="button-container">
-			<button class="confirm-button" onclick="location.href='checkList.jsp'">예약내역확인</button>
-			<button class="confirm-button" onclick="location.href='../index.jsp'">홈으로</button>
+		<div class="button-container">
+			<button class="confirm-button" onclick="location.href=NewFile.jsp">돌아가기</button>
 		</div>
-		
-		
-	
+	</div>
 	<%
 	} else {
 	out.println("Reservation failed. Please try again.");

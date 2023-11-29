@@ -72,13 +72,21 @@
 				<p class="card-text"><%=RoomList.getRoom_detail()%></p>
 				<p class="card-text"><small class="text-muted"><%=RoomList.getRoom_area()%>㎡</small></p>
 				<p class="card-text text-danger"><%=RoomList.getRoom_price()%>원</p>
-				<form action="/MaNolja/room/roomdetail.jsp?room_id=<%=RoomList.getRoom_idx()%>" method="GET" name="detail">
-				<input type="hidden" value="<%=RoomList.getRoom_idx()%>" name="room_id">
-				<input type="hidden" value="<%=startDate%>" name="start_date">
-				<input type="hidden" value="<%=endDate%>" name="end_date">
-				<input type="hidden" value="<%=people%>" name="people">
-				<button class="btn btn-danger">자세히보기</button>
-				</form>
+				<%
+				if (startDate != null && endDate != null && people != null) {%>
+						<form action="/MaNolja/room/roomdetail.jsp?room_id=<%=RoomList.getRoom_idx()%>" method="POST" name="detail">
+						<input type="hidden" value="<%=RoomList.getRoom_idx()%>" name="room_id">
+						<input type="hidden" value="<%=startDate%>" name="start_date">
+						<input type="hidden" value="<%=endDate%>" name="end_date">
+						<input type="hidden" value="<%=people%>" name="people">
+						<button class="btn btn-danger">자세히보기</button>
+						</form>
+					<%}else {%>
+					<form action="/MaNolja/room/roomdetail.jsp?room_id=<%=RoomList.getRoom_idx()%>" method="POST" name="detail">
+						<input type="hidden" value="<%=RoomList.getRoom_idx()%>" name="room_id">
+						<button class="btn btn-danger">자세히보기</button>
+						</form>
+				<%}%>
 			</div>
 		</div>
 	</div>

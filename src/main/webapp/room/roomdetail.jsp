@@ -178,13 +178,14 @@ window.addEventListener('DOMContentLoaded', function() {
 	
 	// 인원 선택 드롭다운 메뉴 설정
 	var peopleSelect = document.getElementById('peopleSelect');
-	peopleSelect.value = "<%= people == null ? "" : people %>";
+	peopleSelect.value = "<%= people == null ? "0" : people %>";
 	peopleSelect.addEventListener('change', function() {
 		document.getElementById('people').value = this.value;
 	});
 	
 	<%
 	String isLogin = (String) session.getAttribute("mem_id");
+	String mem_id = (String) session.getAttribute("mem_id");
 	%>
 	// 예약 버튼 클릭 시 로그인 여부 확인
 	document.getElementById('reservationBtn').addEventListener('click', function() {
@@ -192,12 +193,11 @@ window.addEventListener('DOMContentLoaded', function() {
 			// 로그인한 경우, 예약 페이지로 이동
 			document.getElementById('checkform').submit();
 		<% } else {
-			
 			%>
 			// 로그인하지 않은 경우, 알림창 표시
 			alert("로그인을 해주세요.");
 		<% } %>
-		<% String mem_id = (String) session.getAttribute("mem_id"); %>
+		
 	});
 	
 
@@ -232,18 +232,18 @@ window.addEventListener('DOMContentLoaded', function() {
 	<button id="datePickerBtn" class="btn btn-outline-secondary mr-3">
 		<%= start_date != null && end_date != null ? start_date + " - " + end_date : "입실/퇴실 날짜 선택" %>
 	</button>
-	<select id="peopleSelect" class="btn btn-outline-secondary mr-3">
-		<option selected>인원 선택</option>
+	<form action="/MaNolja/check/check.jsp" method="POST" id="checkform">	
+	<select id="peopleSelect" class="btn btn-outline-secondary mr-3" id="people" name="people">
+		<option selected value="0">인원 선택</option>
 		<option value="1">1명</option>
 		<option value="2">2명</option>
 		<option value="3">3명</option>
 		<option value="4">4명</option>
 	</select>
-	<form action="/MaNolja/check/check.jsp" method="get" id="checkform">	
 		<input type="hidden" name="room_id" value="<%=RoomList.getRoom_idx()%>">
 		<input type="hidden" id="startDate" name="start_date" value="<%=start_date%>">
 		<input type="hidden" id="endDate" name="end_date" value="<%=end_date%>">
-		<input type="hidden" id="people" name="people" value="<%=people%>">
+		<input type="hidden" id="room_price" name="room_price" value="<%=RoomList.getRoom_price() %>">
 		<button type="button" id="reservationBtn" class="btn btn-danger">예약하기</button>
 	</form>
 </div>
@@ -298,7 +298,22 @@ window.addEventListener('DOMContentLoaded', function() {
                 <strong>등록일:</strong> <%=RoomList.getCreated_at()%>
             </p>
         </div>
+		<% 
+		try {
+		    if (mem_id != null) {
+		        if (RoomMgr.adminchk(mem_id)) { %>
+		            <form action="updateRoom.jsp" method="get">
+		                <input type="hidden" name="room_id" value="<%=RoomList.getRoom_idx()%>">
+		                <button type="submit" class="btn btn-primary">수정하기</button>
+		            </form>
+		        <% } 
+		    }
+		} catch (NullPointerException e) {
+		    out.println("mem_id가 null입니다.");
+		}
+		%>
 
+			
         <jsp:include page="/footer.jsp" />
     </div>
 </body>

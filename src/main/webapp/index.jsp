@@ -68,7 +68,7 @@
 	</div>
 	<br>
 	<br>
-	<form id="step0Form" name="step0Form" method="get"
+	<form id="step0Form" name="step0Form" method="POST"
 		action="room/roomlist.jsp" class="search-form">
 		<input type="hidden" name="resIn" id="resIn" value="0">
 		<div class="form-group">
