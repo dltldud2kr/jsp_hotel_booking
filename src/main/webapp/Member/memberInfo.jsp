@@ -15,6 +15,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="../css/member.css">
     <meta charset="UTF-8">
     <title>회원 정보</title>
 </head>

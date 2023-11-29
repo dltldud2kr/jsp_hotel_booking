@@ -115,19 +115,17 @@ public class RoomMgr {
 	    try {
 	        conn = pool.getConnection();
 
-	        String sql = "UPDATE room SET mem_idx=?, room_title=?, room_kind=?, room_people=?, room_detail=?, room_area=?, room_guide=?, room_map=?, room_price=?, room_num=? WHERE room_idx=?";
+	        String sql = "UPDATE room SET room_title=?, room_people=?, room_detail=?, room_area=?, room_guide=?, room_map=?, room_price=?, room_num=? WHERE room_idx=?";
 	        pstmt = conn.prepareStatement(sql);
-	        pstmt.setInt(1, room.getMem_idx());
-	        pstmt.setString(2, room.getRoom_title());
-	        pstmt.setInt(3, room.getRoom_kind());
-	        pstmt.setInt(4, room.getRoom_people());
-	        pstmt.setString(5, room.getRoom_detail());
-	        pstmt.setString(6, room.getRoom_area());
-	        pstmt.setString(7, room.getRoom_guide());
-	        pstmt.setString(8, room.getRoom_map());
-	        pstmt.setInt(9, room.getRoom_price());
-	        pstmt.setInt(10, room.getRoom_num());
-	        pstmt.setInt(11, room.getRoom_idx());
+	        pstmt.setString(1, room.getRoom_title());
+	        pstmt.setInt(2, room.getRoom_people());
+	        pstmt.setString(3, room.getRoom_detail());
+	        pstmt.setString(4, room.getRoom_area());
+	        pstmt.setString(5, room.getRoom_guide());
+	        pstmt.setString(6, room.getRoom_map());
+	        pstmt.setInt(7, room.getRoom_price());
+	        pstmt.setInt(8, room.getRoom_num());
+	        pstmt.setInt(9, room.getRoom_idx());
 
 	        if (pstmt.executeUpdate() > 0) {
 	            isUpdated = true;

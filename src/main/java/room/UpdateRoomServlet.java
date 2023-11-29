@@ -6,15 +6,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import room.*;
 
-@WebServlet("/updateroom")
+@WebServlet("/room/updateroom_process")
 public class UpdateRoomServlet extends HttpServlet {
     /**
 	 * 
@@ -27,9 +21,9 @@ public class UpdateRoomServlet extends HttpServlet {
         RoomBean room = new RoomBean();
         
         room.setRoom_idx(Integer.parseInt(request.getParameter("room_id")));
-        room.setMem_idx(Integer.parseInt(request.getParameter("mem_idx")));
+//        room.setMem_idx(Integer.parseInt(request.getParameter("mem_idx")));
         room.setRoom_title(request.getParameter("room_title"));
-        room.setRoom_kind(Integer.parseInt(request.getParameter("room_kind")));
+//        room.setRoom_kind(Integer.parseInt(request.getParameter("room_kind")));
         room.setRoom_people(Integer.parseInt(request.getParameter("room_people")));
         room.setRoom_detail(request.getParameter("room_detail"));
         room.setRoom_area(request.getParameter("room_area"));

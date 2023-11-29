@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>회원가입</title>
-
+<link rel="stylesheet" type="text/css" href="../css/member.css">
     <script type="text/javascript" src="mem_script.js"></script>
 </head>
 <body onLoad="regFrm.mem_id.focus()">

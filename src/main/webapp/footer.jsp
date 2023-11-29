@@ -4,17 +4,7 @@
 <meta charset="UTF-8">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://kit.fontawesome.com/57a8fee989.js" crossorigin="anonymous"></script>
-<style>
-.footer {
-  background-color: #fff !important;
-}
-.footer .text-light, .footer a, .footer p {
-  color: #000 !important;
-}
-.footer i.fab, .footer i.far {
-  font-size: 3em;  /* 아이콘 크기 조절 */
-}
-</style>
+<link rel="stylesheet" href="css/footer.css">
 </head>
 
 <footer class="footer mt-auto py-3 text-dark">

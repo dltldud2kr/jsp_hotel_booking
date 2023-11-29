@@ -302,7 +302,7 @@ window.addEventListener('DOMContentLoaded', function() {
 		try {
 		    if (mem_id != null) {
 		        if (RoomMgr.adminchk(mem_id)) { %>
-		            <form action="updateRoom.jsp" method="get">
+		            <form action="roomupdate.jsp" method="get">
 		                <input type="hidden" name="room_id" value="<%=RoomList.getRoom_idx()%>">
 		                <button type="submit" class="btn btn-primary">수정하기</button>
 		            </form>

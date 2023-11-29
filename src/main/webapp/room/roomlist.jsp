@@ -53,8 +53,6 @@
 	String endDate = request.getParameter("end-date");
 	String people = request.getParameter("people");
 %>
-<%=startDate %>
-<%=endDate %>
 <%
 	Vector<RoomBean> vlist = RoomMgrP.getRoomList();
 	int counter = vlist.size();

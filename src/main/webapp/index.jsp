@@ -7,8 +7,9 @@
 <title>메인 페이지</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="index.css">
-
+<link rel="stylesheet" href="css/index.css">
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7c19f3c19b34a91d13fb44587165bb0a"></script>
 </head>
 <body>
 	<jsp:include page="header.jsp" />
@@ -94,9 +95,9 @@
 	<br>
 	<br>
 	<br>
-	<h2>FITNESS</h2>
 	<div class="card-container">
 		<div class="row">
+			<h2>FITNESS</h2>
 			<div class="col">
 				<!-- 첫 번째 카드 내용 -->
 				<div class="card">
@@ -134,10 +135,19 @@
 					</div>
 				</div>
 			</div>
+			
 		</div>
-
+<div id="map" style="width:500px;height:400px;"></div>
 	</div>
+<script>
+		var container = document.getElementById('map');
+		var options = {
+			center: new kakao.maps.LatLng(33.450701, 126.570667),
+			level: 3
+		};
 
+		var map = new kakao.maps.Map(container, options);
+</script>
 	<jsp:include page="footer.jsp" />
 
 	<script
@@ -146,6 +156,5 @@
 		crossorigin="anonymous">
 		
 	</script>
-
 </body>
 </html>

@@ -118,29 +118,40 @@ String[] details = RoomList.getRoom_detail().split("\\|");
 	<jsp:include page="/header.jsp" />
 
 	<div class="container my-5">
-		<form action="/MaNolja/room/updateRoom.jsp" method="post">
+		<form action="/MaNolja/room/updateroom_process" method="post">
 			<input type="hidden" name="room_id" value="<%=RoomList.getRoom_idx()%>">
 			<div class="form-group">
 				<label for="room_title">방 제목</label>
 				<input type="text" id="room_title" name="room_title" class="form-control" value="<%=RoomList.getRoom_title()%>">
 			</div>
 			<div class="form-group">
-				<label for="room_people">인원</label>
+				<label for="room_people">객실 인원</label>
 				<input type="number" id="room_people" name="room_people" class="form-control" value="<%=RoomList.getRoom_people()%>">
 			</div>
 			<div class="form-group">
-				<label for="room_area">면적</label>
+				<label for="room_area">객실면적</label>
 				<input type="text" id="room_area" name="room_area" class="form-control" value="<%=RoomList.getRoom_area()%>">
 			</div>
 			<div class="form-group">
-				<label for="room_map">배치</label>
+				<label for="room_map">배치도</label>
 				<input type="text" id="room_map" name="room_map" class="form-control" value="<%=RoomList.getRoom_map()%>">
 			</div>
 			<div class="form-group">
 				<label for="room_num">객실 수</label>
-				<input type="number" id="room_num" name="room_num" class="form-control" value="<%=RoomList.getRoom_num()%>">
+				<input type="number" id="room_num" name="room_num" class="form-control" value="<%=RoomList.getRoom_kind()%>">
 			</div>
-			<!-- ... 기타 필요한 필드 ... -->
+			<div class="form-group">
+				<label for="room_num">가격</label>
+				<input type="number" id="room_price" name="room_price" class="form-control" value="<%=RoomList.getRoom_price()%>">
+			</div>
+			<div class="form-group">
+				<label for="room_num">이용 안내</label>
+				<input type="text" id="room_guide" name="room_guide" class="form-control" value="<%=RoomList.getRoom_guide()%>">
+			</div>
+			<div class="form-group">
+				<label for="room_num">객실 상세정보</label>
+				<input type="text" id="room_detail" name="room_detail" class="form-control" value="<%=RoomList.getRoom_detail()%>">
+			</div>
 			<button type="submit" class="btn btn-primary">수정하기</button>
 		</form>
 	</div>

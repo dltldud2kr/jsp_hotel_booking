@@ -2,43 +2,43 @@
 <%
     request.setCharacterEncoding("utf-8");
     String mem_id = (String) session.getAttribute("mem_id");
-    Integer mem_idx = (Integer) session.getAttribute("mem_idx");
 %>
 <html>
 <head>
+    <jsp:include page="/header.jsp" />
     <title>로그인</title>
-    <script type="text/javascript">
-        function loginCheck() {
-            if (document.loginFrm.mem_id.value == "") {
-                alert("아이디를 입력해 주세요.");
-                document.loginFrm.mem_id.focus();
-                return;
-            }
-            if (document.loginFrm.mem_pw.value == "") {
-                alert("비밀번호를 입력해 주세요.");
-                document.loginFrm.mem_pw.focus();
-                return;
-            }
-            document.loginFrm.submit();
-        }
-    </script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/login.css">
 </head>
 <body>
-    <div align="left">
-        <% if (mem_id != null) { %>
-            <b><%= mem_id %></b>님 환영합니다.
-            <a href="memberInfo.jsp">마이페이지</a>
-            <a href="logout.jsp">로그아웃</a>
-
-        <% } else { %>
-            <h4>로그인</h4>
-            <form name="loginFrm" method="post" action="loginProc.jsp">
-                <p><input name="mem_id"></p>
-                <p><input type="password" name="mem_pw"></p>
-                <input type="button" value="로그인" onclick="loginCheck()">
-                <input type="button" value="회원가입" onClick="javascript:location.href='member.jsp'">
-            </form>
-        <% } %>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mx-auto login-container">
+                <% if (mem_id != null) { %>
+                    <div class="text-center">
+                        <b><%= mem_id %></b>님 환영합니다.
+                        <p>제한된 기능을 사용할 수 있습니다.</p>
+                        <a href="memberInfo.jsp" class="btn btn-primary login-btn">마이페이지</a>
+                        <a href="logout.jsp" class="btn btn-danger login-btn">로그아웃</a>
+                    </div>
+                <% } else { %>
+                    <div class="login-title">
+                        <h4>로그인</h4>
+                    </div>
+                    <form name="loginFrm" method="post" action="loginProc.jsp">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="mem_id" placeholder="아이디">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" name="mem_pw" placeholder="비밀번호">
+                        </div>
+                        <button type="button" class="btn btn-black text-dark login-btn" onclick="loginCheck()">로그인</button>
+                        <button type="button" class="btn btn-black text-dark login-btn" onclick="location.href='member.jsp'">회원가입</button>
+                    </form>
+                <% } %>
+            </div>
+        </div>
     </div>
+    <jsp:include page="/footer.jsp" />
 </body>
 </html>

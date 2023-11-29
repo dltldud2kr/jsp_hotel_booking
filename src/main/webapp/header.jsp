@@ -3,14 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-<style>
-.navbar {
-  background-color: #fff !important;
-}
-.nav-link {
-  color: #000 !important;
-}
-</style>
+<link rel="stylesheet" href="css/header.css">
 </head>
 
 <nav class="navbar navbar-expand-lg p-4">
