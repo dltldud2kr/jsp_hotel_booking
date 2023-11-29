@@ -23,7 +23,7 @@
             // 로그인 성공 시 idx 값을 세션에 저장
             session.setAttribute("mem_id", mem_id);
             session.setAttribute("mem_idx", idx);
-            url = "login.jsp";
+            url = "../index.jsp";
             msg = "로그인에 성공 하였습니다.";
         }
     }

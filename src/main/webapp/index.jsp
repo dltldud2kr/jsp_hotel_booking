@@ -95,7 +95,7 @@
 	<br>
 	<br>
 	<br>
-	<div class="card-container">
+	<div class="card-container" style="align-items: center;">
 		<div class="row">
 			<h2>FITNESS</h2>
 			<div class="col">
@@ -135,19 +135,45 @@
 					</div>
 				</div>
 			</div>
-			
 		</div>
-<div id="map" style="width:500px;height:400px;"></div>
 	</div>
-<script>
-		var container = document.getElementById('map');
-		var options = {
-			center: new kakao.maps.LatLng(33.450701, 126.570667),
-			level: 3
+<div class="container">
+  <div class="row">
+    <!-- Contact us -->
+    <div class="col-12 col-lg-6">
+      <h3 class="text-center mt-5">Contact us</h3>
+      <p class="text-center">대구광역시 북구 복현로 35</p>
+      <p class="text-center">053-940-5175</p>
+    </div>
+    <!-- Map -->
+    <div class="col-12 col-lg-6">
+      <div id="map" style="height: 400px; width:100%"></div>
+    </div>
+  </div>
+</div>
+
+
+	<script>
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		mapOption = {
+			center : new kakao.maps.LatLng(35.896812, 128.620884), // 지도의 중심좌표
+			level : 3
+		// 지도의 확대 레벨
 		};
 
-		var map = new kakao.maps.Map(container, options);
-</script>
+		var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+		//마커가 표시될 위치입니다 
+		var markerPosition = new kakao.maps.LatLng(35.896812, 128.620884);
+
+		//마커를 생성합니다
+		var marker = new kakao.maps.Marker({
+			position : markerPosition
+		});
+
+		//마커가 지도 위에 표시되도록 설정합니다
+		marker.setMap(map);
+	</script>
 	<jsp:include page="footer.jsp" />
 
 	<script
