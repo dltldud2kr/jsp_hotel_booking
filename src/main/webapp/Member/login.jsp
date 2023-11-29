@@ -2,6 +2,7 @@
 <%
     request.setCharacterEncoding("utf-8");
     String mem_id = (String) session.getAttribute("mem_id");
+    Integer mem_idx = (Integer) session.getAttribute("mem_idx");
 %>
 <html>
 <head>
@@ -23,13 +24,12 @@
     </script>
 </head>
 <body>
-<jsp:include page="/header.jsp"/>
     <div align="left">
         <% if (mem_id != null) { %>
             <b><%= mem_id %></b>님 환영합니다.
-            <p>제한된 기능을 사용 할 수가 있습니다.</p>
             <a href="memberInfo.jsp">마이페이지</a>
             <a href="logout.jsp">로그아웃</a>
+
         <% } else { %>
             <h4>로그인</h4>
             <form name="loginFrm" method="post" action="loginProc.jsp">

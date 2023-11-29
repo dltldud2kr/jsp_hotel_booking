@@ -197,6 +197,7 @@ window.addEventListener('DOMContentLoaded', function() {
 			// 로그인하지 않은 경우, 알림창 표시
 			alert("로그인을 해주세요.");
 		<% } %>
+		<% String mem_id = (String) session.getAttribute("mem_id"); %>
 	});
 	
 
@@ -246,7 +247,7 @@ window.addEventListener('DOMContentLoaded', function() {
 		<button type="button" id="reservationBtn" class="btn btn-danger">예약하기</button>
 	</form>
 </div>
-		<p class="text-danger h4 mb-4"><%=RoomList.getRoom_price()%>
+		<p class="text-danger h4 mb-4">
 			₩ <%=RoomList.getRoom_price() %>
 		</p>
 		<div class="row">
@@ -297,6 +298,7 @@ window.addEventListener('DOMContentLoaded', function() {
                 <strong>등록일:</strong> <%=RoomList.getCreated_at()%>
             </p>
         </div>
+
         <jsp:include page="/footer.jsp" />
     </div>
 </body>

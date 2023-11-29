@@ -106,6 +106,10 @@ public class RoomMgr {
 		return vinfo;
 	}
 
-    
-    
+	public boolean adminchk(String mem_id) { // 어드민 확인
+	    return mem_id != null && mem_id.equals("admin");
+	}
+	
+
+		
  }

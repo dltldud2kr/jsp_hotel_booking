@@ -41,7 +41,7 @@ public class DBConnectionMgr {
     private String _driver = "com.mysql.cj.jdbc.Driver",
     _url = "jdbc:mysql://localhost:3306/jsp_project?useUnicode=true&characterEncoding=utf-8",
     _user = "root",
-    _password = "1234";
+    _password = "y3ori";
     
     
     private boolean _traceOn = false;
