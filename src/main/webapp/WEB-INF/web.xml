@@ -19,4 +19,14 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>DeleteRoomServlet</display-name>
+    <servlet-name>DeleteRoomServlet</servlet-name>
+    <servlet-class>room.DeleteRoomServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteRoomServlet</servlet-name>
+    <url-pattern>/DeleteRoomServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

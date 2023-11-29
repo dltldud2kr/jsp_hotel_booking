@@ -139,6 +139,29 @@ public class RoomMgr {
 	    return isUpdated;
 	}
 
+	public boolean deleteRoom(RoomBean room) {
+	    Connection conn = null;
+	    PreparedStatement pstmt = null;
+	    boolean isDeleted = false;
+
+	    try {
+	        conn = pool.getConnection();
+
+	        String sql = "DELETE FROM ROOM WHERE room_idx=?";
+	        pstmt = conn.prepareStatement(sql);
+	        pstmt.setInt(1, room.getRoom_idx());
+
+	        if (pstmt.executeUpdate() > 0) {
+	        	isDeleted = true;
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        pool.freeConnection(conn, pstmt);
+	    }
+
+	    return isDeleted;
+	}
 	
 	public boolean adminchk(String mem_id) { // 어드민 확인
 	    return mem_id.equals("admin");

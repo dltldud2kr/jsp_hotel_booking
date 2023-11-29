@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="css/footer.css">
 </head>
 
-<footer class="footer mt-auto py-3 text-dark">
+<footer class="footer py-3 text-dark">
     <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
         <div class="mb-3 mb-md-0">
             <a href="<%=request.getContextPath()%>/index.do" class="h4 text-decoration-none text-dark">Manolja</a>
@@ -38,4 +38,3 @@
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
