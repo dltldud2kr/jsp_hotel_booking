@@ -1,56 +1,46 @@
-/* member.css */
-
-
-/* ... rest of the styles ... */
-.reg input {
-	width: 100px;
+.member-title {
+	text-align: center;
+	margin-bottom: 20px;
+}
+.centered-group {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px; /* 예시: 내부 여백 추가 */
 }
 
-.info-label {
-    font-weight: bold;
+.centered-group .form-group.reg {
+    width: 300px;
+    margin: 0 auto 10px;
+    display: flex;
+    flex-direction: row; /* 가로로 나열 */
+    align-items: center; /* 수직 가운데 정렬 */
 }
 
-.info-value {
-    margin-bottom: 10px;
-}
-
-.edit-btn {
+.form-group.reg input[type="text"],
+.form-group.reg input[type="password"] {
+    width: 300px;
     padding: 10px;
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    cursor: pointer;
+    box-sizing: border-box;
+    height: 40px;
 }
 
-.edit-btn:hover {
-    background-color: #218838;
+.centered-group .form-group.reg .btn-custom {
+    margin-left: 7px; /* 버튼을 왼쪽으로 10px 이동 */
+    margin-top: 5px; /* 버튼의 상단 마진을 0으로 설정 */
+    padding: 10px 9px; /* 버튼의 크기 조절 */
 }
 
-.save-btn {
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    cursor: pointer;
+.button-container {
+    text-align: center;
+    margin-left: 146px; /* 오른쪽 여백 추가 */
+
 }
 
-.save-btn:hover {
-    background-color: #0056b3;
+.btn-primary,
+.btn-secondary,
+.btn-link {
+    margin: 5px;
 }
 
-.cancel-btn {
-    padding: 10px;
-    background-color: #dc3545;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-}
-
-.cancel-btn:hover {
-    background-color: #c82333;
-}
-
-.sk {
-	width: 10px;
-	background-color: #000000!important;
-}

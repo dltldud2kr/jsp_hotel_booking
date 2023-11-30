@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
     <%@ page import="check.checkMgr" %>
     
-    
     <jsp:useBean id="checkMgr" class="check.checkMgr" scope="page" />
     
 <!DOCTYPE html>

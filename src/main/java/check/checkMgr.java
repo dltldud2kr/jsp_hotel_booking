@@ -117,6 +117,51 @@ public class checkMgr {
         }
         return vlist;
      }
+    
+    
+    
+    public boolean cancelReservation(int resev_idx) {
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        boolean flag = false;
+
+        try {
+            // DB 연결
+            con = pool.getConnection();
+
+            // 쿼리 작성
+            String sql = "DELETE FROM booking WHERE resev_idx = ?";
+            
+            // PreparedStatement 설정
+            pstmt = con.prepareStatement(sql);
+            pstmt.setInt(1, resev_idx);
+
+            // 쿼리 실행
+            int rowsAffected = pstmt.executeUpdate();
+
+            // 성공적으로 실행되면 rowsAffected는 1 이상의 값이 됨
+            flag = (rowsAffected > 0);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+            // 리소스 해제
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return flag;
+    }
 	
 	
 }

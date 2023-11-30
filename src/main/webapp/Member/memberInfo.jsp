@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="Member.MemberBean"%>
 <%@ page import="Member.MemberMgr"%>
+<%@ page import="check.checkMgr"%>
 
 <%
 String mem_id = (String) session.getAttribute("mem_id");
@@ -13,6 +14,7 @@ if (mem_id == null) {
 	MemberBean memberInfo = memberMgr.getMemberInfo(mem_id);
 	String mem_name = memberInfo.getMem_name();
 %>
+<jsp:useBean id="checkMgr" class="check.checkMgr" scope="page" />
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -156,7 +158,7 @@ body {
 			<p>
 				생년월일
 				<%=memberInfo.getMem_birth()%></p>
-			<button onclick="location.href='logout.jsp'">로그아웃</button>
+
 		</div>
 
 		<div id="content4">
@@ -178,7 +180,7 @@ body {
 			var xhttp = new XMLHttpRequest();
 			xhttp.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
-					// content4에 내용 표시
+					// content1에 내용 표시
 					document.getElementById("content1").innerHTML = this.responseText;
 				}
 			};
@@ -187,7 +189,7 @@ body {
 
 			hideAllContent();
 
-			// content4 
+			// content1
 			document.getElementById("content1").style.display = "block";
 		}
 
@@ -245,6 +247,36 @@ body {
 			document.getElementById("content4").style.display = "none";
 			document.getElementById("content5").style.display = "none";
 		}
+		
+		
+	    function cancelReservation(resevIdx) {
+	        // AJAX 요청 생성
+	        var xhr = new XMLHttpRequest();
+
+	        // 취소에 성공했을 때의 처리
+	        xhr.onload = function () {
+	            if (xhr.status === 200) {
+	                // 취소에 성공했을 때 추가적인 처리 가능
+	                alert('예약이 취소되었습니다.');
+	                location.reload(); // 페이지 새로고침
+	            }
+	        };
+
+	        // 취소에 실패했을 때의 처리
+	        xhr.onerror = function () {
+	            alert('취소에 실패했습니다.');
+	        };
+
+	        // 서버에 보낼 데이터 설정
+	        var params = 'resevIdx=' + resevIdx;
+
+	        // 현재 페이지 URL을 기준으로 POST 요청 설정
+	        xhr.open('POST', '../check/checkMgrCancelReservation.jsp', true);
+	        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+	        // 서버로 데이터 전송
+	        xhr.send(params);
+	    }
 	</script>
 </body>
 </html>

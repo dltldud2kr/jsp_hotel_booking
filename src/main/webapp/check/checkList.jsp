@@ -4,6 +4,9 @@
 <%@ page import="check.ReservationBean"%>
 <%@ page import="check.DBConnectionMgr"%>
 <%@ page import="check.checkMgr"%>
+<%@ page import="Member.MemberBean"%>
+<%@ page import="Member.MemberMgr"%>
+
 
 <jsp:useBean id="checkMgr" class="check.checkMgr" scope="page" />
 
@@ -26,21 +29,26 @@
 </head>
 <body>
 	<%
-	int mem_idx;
-	String mem_id;
 
-	Object memIdxObj = session.getAttribute("mem_idx");
-	mem_idx = (int) memIdxObj;
-	Object memIdObj = session.getAttribute("mem_id");
-	mem_id = (String) memIdObj;
 
+	int mem_idx = (int) session.getAttribute("mem_idx");
+	String mem_id = (String) session.getAttribute("mem_id");
+
+	if (mem_id == null) {
+		response.sendRedirect("/login.jsp");
+	} else {
+		MemberMgr memberMgr = new MemberMgr();
+		MemberBean memberInfo = memberMgr.getMemberInfo(mem_id);
+		String mem_name = memberInfo.getMem_name();
+		
+		
 	Vector<ReservationBean> checkList = checkMgr.getCheckList(mem_idx);
 	%>
 
 	<div class="container mt-5">
 		<h2 class="mb-4">
 			
-			<%=mem_id%> 님의 예약 정보
+			<%=mem_name%> 님의 예약 정보
 		</h2>
 		<table class="table table-bordered">
 			<thead>
@@ -67,11 +75,11 @@
 					<td><%=bean.getEnd_date()%></td>
 					<td><%=bean.getResev_at()%></td>
 					<td><%=bean.getPeople()%></td>
-					<td><%=bean.getResev_price()%></td> <
+					<td><%=bean.getResev_price()%></td> 
 					<!-- 삭제 버튼 부분 수정 -->
 					<td>
 						<button class="btn btn-danger"
-							onclick="cancelReservation(<%=bean.getResev_idx()%>)">삭제</button>
+							onclick="cancelReservation(<%=bean.getResev_idx()%>)">예약취소</button>
 					</td>
 				</tr>
 				<%
@@ -82,6 +90,7 @@
 	</div>
 
 	<script>
+	console.log("test");
     function cancelReservation(resevIdx) {
         // AJAX 요청 생성
         var xhr = new XMLHttpRequest();
@@ -115,3 +124,7 @@
 
 </body>
 </html>
+
+<%
+}
+%>
