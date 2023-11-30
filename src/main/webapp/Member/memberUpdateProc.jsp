@@ -29,28 +29,12 @@
 
     // 회원 정보 업데이트
     boolean updateResult = memberMgr.updateMember(updatedMember);
+
+    if (updateResult) {
+        // 성공적으로 탈퇴한 경우
+        response.getWriter().println("<script>alert('회원 정보 수정이 성공적으로 처리되었습니다.'); window.location.href = 'memberInfo.jsp';</script>");
+    } else {
+        // 탈퇴 실패한 경우
+        response.getWriter().println("<script>alert('회원 정보 수정에 실패했습니다. 다시 시도해주세요.'); window.location.href = 'memeberInfo.jsp';</script>");
+    }
 %>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>회원 정보 수정 결과</title>
-</head>
-<body>
-    <h1>회원 정보 수정 결과</h1>
-    <%= updateResult %>
-    <% if (updateResult) { %>
-        <p>회원 정보가 성공적으로 수정되었습니다.</p>
-    <% } else { %>
-        <p>회원 정보 수정에 실패하였습니다.</p>
-    <% } %>
-
-    <br>
-    <a href="memberInfo.jsp">마이페이지로 돌아가기</a>
-    
-
-	
-</body>
-</html>

@@ -25,6 +25,7 @@
 	crossorigin="anonymous">
 
 
+    <jsp:include page="/header.jsp" />
 
 </head>
 <body>
@@ -121,6 +122,7 @@
     }
 </script>
 
+    <jsp:include page="/footer.jsp" />
 
 </body>
 </html>
