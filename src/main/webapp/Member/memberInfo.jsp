@@ -35,7 +35,7 @@ body {
 }
 
 #sidebar {
-	background-color: #f1f1f1;
+	background-color: white;
 	padding: 40px;
 	width: 250px;
 	height: 600px;
@@ -44,10 +44,11 @@ body {
 #content1, #content2, #content3, #content4, #content5 {
 	display: none;
 	padding: 20px;
-	padding: 35px 20px; /* 40px은 위쪽 여백, 20px은 좌우 여백 */
-	background-color: #f1f3f5;
+	padding: 3px 20px; /* 40px은 위쪽 여백, 20px은 좌우 여백 */
+	background-color: white;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 	flex: 1;
+	height: max-content;
 }
 
 #sidebar h2 {
@@ -71,11 +72,21 @@ body {
 #content h1, #content1 h4, #content2 h4, #content3 h1, #content4 h4,
 	#content5 h4 {
 	color: #333;
-	text-align: left;
+	align-items: center;
+}
+#content3, #content4 {
+    text-align: left;
 }
 
-#content p {
-	color: #555;
+#content5 {
+    text-align: center;
+}
+#content3 p {
+    color: #555;
+}
+
+#content5 h4 {
+    text-align: center;
 }
 
 #content a {
@@ -278,6 +289,24 @@ body {
 	        xhr.send(params);
 	    }
 	</script>
+	
+	<script>
+        function confirmWithdraw() {
+        	console.log("confirmWithdraw in !!! ")
+            // confirm 함수를 사용하여 경고창 표시
+            var result = confirm("정말로 회원 탈퇴하시겠습니까?");
+            if (result) {
+            	console.log("result is true");
+                // 확인을 선택한 경우, 서버로 탈퇴 요청
+                document.getElementById("withdrawForm").submit();
+            } else {
+                // 취소를 선택한 경우
+                // 필요하다면 다른 처리를 추가할 수 있습니다.
+            	console.log("result is false");
+            }
+        }
+    </script>
+    
 </body>
 </html>
 

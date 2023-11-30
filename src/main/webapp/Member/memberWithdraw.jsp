@@ -9,6 +9,7 @@
     <title>회원 탈퇴</title>
     <script>
         function confirmWithdraw() {
+        	console.log("confirmWithdraw in !!! ")
             // confirm 함수를 사용하여 경고창 표시
             var result = confirm("정말로 회원 탈퇴하시겠습니까?");
             if (result) {
@@ -22,6 +23,10 @@
     </script>
 </head>
 <body>
+<%
+String mem_id = (String) session.getAttribute("mem_id");
+%>
+
     <h1>회원 탈퇴</h1>
     <p>회원 탈퇴하시려면 아래 버튼을 클릭하세요.</p>
     
@@ -30,7 +35,9 @@
 
     <!-- 회원 탈퇴 폼 -->
     <form id="withdrawForm" action="memberWithdrawProc.jsp" method="post">
-        <input type="hidden" name="mem_id" value="<%= request.getParameter("mem_id") %>">
+    
+    
+        <input type="hidden" name="mem_id" value="<%= mem_id %>">
     </form>
 </body>
 </html>

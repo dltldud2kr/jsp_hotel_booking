@@ -21,6 +21,8 @@
     updatedMember.setMem_phone(mem_phone);
     updatedMember.setMem_addr(mem_addr);
     updatedMember.setMem_birth(mem_birth);
+    
+    
 
     // 업데이트를 수행할 MemberMgr 객체 생성
     MemberMgr memberMgr = new MemberMgr();
@@ -38,6 +40,7 @@
 </head>
 <body>
     <h1>회원 정보 수정 결과</h1>
+    <%= updateResult %>
     <% if (updateResult) { %>
         <p>회원 정보가 성공적으로 수정되었습니다.</p>
     <% } else { %>
@@ -46,5 +49,8 @@
 
     <br>
     <a href="memberInfo.jsp">마이페이지로 돌아가기</a>
+    
+
+	
 </body>
 </html>

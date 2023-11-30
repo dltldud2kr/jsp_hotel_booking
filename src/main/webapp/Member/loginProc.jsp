@@ -14,12 +14,12 @@
     boolean isAdmin = mMgr.isAdmin(mem_id, mem_pw);
     int idx = mMgr.loginMember(mem_id, mem_pw);
     if (isAdmin) {
-    	session.setAttribute("mem_id", mem_id);
-    	session.setAttribute("mem_idx", 1);
-        url = "admin.jsp";
+       session.setAttribute("mem_id", mem_id);
+       session.setAttribute("mem_idx", 1);
+        url = "../index.jsp";
         msg = "관리자로 로그인하였습니다.";
     } else {
-    	if (idx != -1) {
+       if (idx != -1) {
             // 로그인 성공 시 idx 값을 세션에 저장
             session.setAttribute("mem_id", mem_id);
             session.setAttribute("mem_idx", idx);

@@ -29,6 +29,8 @@ if (mem_id == null) {
 		<!-- 기존 회원 정보 표시 -->
 		<p>
 			아이디
+			<input type="hidden" id="newId" name="newId"
+				value="<%=memberInfo.getMem_id()%>">
 			<%=memberInfo.getMem_id()%></p>
 		<p>
 			비밀번호   <input type="password" id="newPw" name="newPw"
@@ -36,6 +38,8 @@ if (mem_id == null) {
 		</p>
 		<p>
 			이름
+			<input type="hidden" id="newName" name="newName"
+				value="<%=memberInfo.getMem_name()%>">
 			<%=memberInfo.getMem_name()%></p>
 		<p>
 			휴대폰  <input type="text" id="newPhone" name="newPhone"
@@ -48,6 +52,8 @@ if (mem_id == null) {
 		</p>
 		<p>
 			생년월일
+			<input type="hidden" id="newBirth" name="newBirth"
+				value="<%=memberInfo.getMem_birth()%>">
 			<%=memberInfo.getMem_birth()%></p>
 		<input type="submit" value="수정">
 	</form>

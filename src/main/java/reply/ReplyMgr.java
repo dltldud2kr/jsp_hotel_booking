@@ -8,17 +8,17 @@ import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-public class ReplyDAO {
+public class ReplyMgr {
     private Connection conn; // db와 연결하는 객체
     private ResultSet rs;
 
     // 생성자 (Constructor)
-    public ReplyDAO() {
+    public ReplyMgr() {
         try {
             // DB 연결 정보
             String dbURL = "jdbc:mysql://localhost:3306/jsp_project?useSSL=false";
             String dbID = "root";
-            String dbPassword = "1234!";
+            String dbPassword = "1234";
             
             // JDBC 드라이버 로드 및 연결
             Class.forName("com.mysql.jdbc.Driver");
@@ -59,14 +59,15 @@ public class ReplyDAO {
     }
 
     // 댓글 작성 메서드
-    public int write(int review_idx, String reply_cmt, String mem_name) {
-        String SQL = "INSERT INTO reply VALUES(?, ?, ?, ?, NOW())";
+    public int write(int room_id, String reply_cmt, String mem_id) {
+        String SQL = "INSERT INTO reply(reply_idx, mem_idx,room_idx,reply_cmt,created_at,mem_id) VALUES(?, ?, ?, ?, NOW(), ?)";
         try {
             PreparedStatement pstmt = conn.prepareStatement(SQL);
             pstmt.setInt(1, getNext());
-            pstmt.setInt(2, review_idx);
-            pstmt.setString(3, reply_cmt);
-            pstmt.setString(4, mem_name);
+            pstmt.setInt(2, 3);
+            pstmt.setInt(3, room_id);
+            pstmt.setString(4, reply_cmt);
+            pstmt.setString(5, mem_id);
             pstmt.executeUpdate();
             return getNext();
         } catch (Exception e) {
@@ -92,31 +93,29 @@ public class ReplyDAO {
     }
 
     // 특정 리뷰에 속하는 댓글 리스트를 가져오는 메서드
-    public ArrayList<Reply> getList(int review_idx) {
-        String SQL = "SELECT r.*, m.mem_name FROM reply r " +
-                     "JOIN member m ON r.mem_idx = m.mem_idx " +
-                     "WHERE r.review_idx = ? ORDER BY r.review_idx DESC";
+    public ArrayList<ReplyBean> getList(int room_idx) {
+        String SQL = "SELECT * FROM reply WHERE room_idx = ?";
 
-        ArrayList<Reply> list = new ArrayList<>();
+        ArrayList<ReplyBean> list = new ArrayList<>();
         try {
             PreparedStatement pstmt = conn.prepareStatement(SQL);
-            pstmt.setInt(1, review_idx);
+            pstmt.setInt(1, room_idx);
             rs = pstmt.executeQuery();
             while (rs.next()) {
-                Reply reply = new Reply();
-                reply.setReply_idx(rs.getInt("reply_idx"));
-                reply.setMem_idx(rs.getInt("mem_idx"));
-                reply.setReview_idx(rs.getInt("review_idx"));
-                reply.setReply_cmt(rs.getString("reply_cmt"));
-                reply.setMem_name(rs.getString("mem_name"));
+                ReplyBean replyBean = new ReplyBean();
+                replyBean.setReply_idx(rs.getInt("reply_idx"));
+                replyBean.setMem_idx(rs.getInt("mem_idx"));
+                replyBean.setRoom_id(rs.getInt("room_idx"));
+                replyBean.setReply_cmt(rs.getString("reply_cmt"));
+                replyBean.setMem_id(rs.getString("mem_id"));
                 
                 // 추가된 부분: 댓글 작성 일자
                 Timestamp timestamp = rs.getTimestamp("created_at");
                 if (timestamp != null) {
-                    reply.setCreated_at(new Date(timestamp.getTime()));
+                    replyBean.setCreated_at(new Date(timestamp.getTime()));
                 }
 
-                list.add(reply);
+                list.add(replyBean);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -139,21 +138,16 @@ public class ReplyDAO {
     }
 
     // 특정 댓글을 가져오는 메서드
-    public Reply getReply(int reply_idx) {
-        String SQL = "SELECT * FROM reply WHERE reply_idx = ? ORDER BY reply_idx DESC";
+    public ReplyBean getReply(int reply_idx) {
+        String SQL = "SELECT mem_id FROM reply WHERE reply_idx=?";
         try {
             PreparedStatement pstmt = conn.prepareStatement(SQL);
             pstmt.setInt(1, reply_idx);
             rs = pstmt.executeQuery();
             while (rs.next()) {
-                Reply reply = new Reply();
-                reply.setReply_idx(rs.getInt(1));
-                reply.setMem_idx(rs.getInt(2));
-                reply.setReview_idx(rs.getInt(3));
-                reply.setReply_cmt(rs.getString(4));
-                reply.setMem_name(rs.getString(5));
-                reply.setCreated_at(rs.getDate("created_at"));
-                return reply;
+                ReplyBean replyBean = new ReplyBean();
+                replyBean.setMem_id(rs.getString(1));
+                return replyBean;
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -2,13 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.io.File" %>
 <%@ page import="java.util.Enumeration" %>
-<%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
-<%@ page import="com.oreilly.servlet.MultipartRequest"%>
-<%@ page import="reply.ReplyDAO"%>
-<%@ page import="reply.Reply"%>
+<%@ page import="reply.ReplyMgr"%>
+<%@ page import="reply.ReplyBean"%>
 <%@ page import="java.io.PrintWriter"%>
 <%
-    request.setCharacterEncoding("UTF-8");
+request.setCharacterEncoding("UTF-8");
 %>
 <!DOCTYPE html>
 <html>
@@ -20,10 +18,18 @@
     </script>
 </head>
 <body>
-    <%
-        String mem_name = null;
-        if (session.getAttribute("mem_name") != null) {
-            mem_name = (String) session.getAttribute("mem_name");
+<%
+request.setCharacterEncoding("UTF-8");
+int reply_idx = Integer.parseInt(request.getParameter("reply_idx"));
+String reply_cmt = request.getParameter("reply_cmt");
+
+ReplyMgr replyDAO = new ReplyMgr();
+int result = replyDAO.update(reply_idx, reply_cmt);
+%>
+<%--     <%
+        String mem_id = null;
+        if (session.getAttribute("mem_id") != null) {
+            mem_id = (String) session.getAttribute("mem_id");
         }
         int reply_idx = 0; // 수정: commentID를 reply_idx로 변경
         if (request.getParameter("reply_idx") != null){
@@ -34,7 +40,7 @@
             reply_cmt = request.getParameter("reply_cmt");
         }
         
-        if (mem_name == null) {
+        if (mem_id == null) {
             PrintWriter script = response.getWriter();
             script.println("<script>");
             script.println("alert('로그인을 하세요.')");
@@ -55,7 +61,7 @@
         }
         Reply reply = new ReplyDAO().getReply(reply_idx);
 
-        if (!mem_name.equals(reply.getMem_name())) {
+        if (!mem_id.equals(reply.getMem_id())) {
             PrintWriter script = response.getWriter();
             script.println("<script>");
             script.println("alert('권한이 없습니다.')");
@@ -86,6 +92,6 @@
                 }
             }
         }
-    %>
+    %> --%>
 </body>
 </html>

@@ -11,6 +11,53 @@
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7c19f3c19b34a91d13fb44587165bb0a"></script>
 </head>
+<style>
+.info_list {
+    display: flex;
+    justify-content: flex-start;\
+    border-bottom: 2px solid #ddd;
+    flex-wrap: wrap;
+        text-align: center;
+}
+
+.info_list li {
+	list-style: none;
+	    text-align: center;
+}
+
+.info_list li a {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: flex-start;
+    text-decoration: none;
+    color: #555
+    }
+    
+.info_list li {
+    padding: 23px 0;
+    flex-basis: 47%;
+    
+    }
+    
+.info_list li img {
+    display: block;
+    width: 19%;
+        margin: 0 auto;
+    }
+    
+.info_list li span p {
+    font-family: Noto Sans KR , '맑은 고딕', '돋움', Dotum, '굴림', Gulim, Sans-serif;
+    font-weight: 300;
+    font-size: 13px;
+    color: #555
+    }
+    
+.info_list li span {
+	    margin: 0;
+    padding: 0;
+}
+</style>
 <body>
 	<jsp:include page="header.jsp" />
 	<div id="carouselExampleIndicators" class="carousel slide"
@@ -141,9 +188,65 @@
   <div class="row">
     <!-- Contact us -->
     <div class="col-12 col-lg-6">
-      <h3 class="text-center mt-5">Contact us</h3>
+      <h3 class="text-center mt-2">Contact us</h3>
       <p class="text-center">대구광역시 북구 복현로 35</p>
       <p class="text-center">053-940-5175</p>
+      <ul class="info_list">
+									<li>
+										<a href="https://be.wingsbooking.com/ko/ITB3?" target="_blank">
+											<img src="img/icon_location01.svg" alt="">
+											<span>
+												<p>인터불고만의 럭셔리룸</p>
+												<em>객실예약</em>
+											</span>
+										</a>
+									</li>
+									<li>
+										<a href="/contents/08_customer/online.html?online_id=koweb_online_inquiry&amp;mode=write">
+											<img src="img/icon_location02.svg" alt="">
+											<span>
+												<p>언제든지 문의주세요!</p>
+												<em>고객문의</em>
+											</span>
+										</a>
+									</li>
+									<li>
+										<a href="https://catchtable.co.kr/thebuffet" target="_blank">
+											<img src="img/icon_location03.svg" alt="">
+											<span>
+												<p>스페셜한 인터불고 다이닝</p>
+												<em>더 뷔페 예약</em>
+											</span>
+										</a>
+									</li>
+									<li>
+										<a href="/contents/08_customer/sub12.html">
+											<img src="img/icon_location04.svg" alt="">
+											<span>
+												<p>인터불고를 알고싶다면?</p>
+												<em>회사소개</em>
+											</span>
+										</a>
+									</li>
+									<li>
+										<a href="/contents/08_customer/sub10.html">
+											<img src="img/icon_location06.svg" alt="">
+											<span>
+												<p>인터불고에서 특별한 추억을!</p>
+												<em>포토존 안내</em>
+											</span>
+										</a>
+									</li>
+									<li>
+										<a href="/contents/08_customer/sub11.html">
+											<img src="img/icon_location05.svg" alt="">
+											<span>
+												<p>편안한 휴식의 즐거움</p>
+												<em>오시는 길</em>
+											</span>
+										</a>
+									</li>									
+								</ul>
     </div>
     <!-- Map -->
     <div class="col-12 col-lg-6">

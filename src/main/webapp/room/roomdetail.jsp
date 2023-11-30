@@ -194,6 +194,7 @@ window.addEventListener('DOMContentLoaded', function() {
                 <li>전 객실 금연입니다.</li>
             </ul>
         </div>
+        
         <div class="row mt-3 text-right">
             <p class="col-md-9">
                 <strong>등록일:</strong> <%=RoomList.getCreated_at()%>
@@ -213,7 +214,8 @@ window.addEventListener('DOMContentLoaded', function() {
 		    out.println("비로그인 회원");
 		}
 		%>
-		<div id="fade-overlay"></div>	
+		<div id="fade-overlay"></div>
+		<jsp:include page="../reply/reply.jsp"></jsp:include>	
         <jsp:include page="/footer.jsp" />
     </div>
 </body>
