@@ -25,7 +25,7 @@
 ### DEMO IMAGE
 ![메인페이지1](https://github.com/dltldud2kr/jsp_hotel_booking/assets/105353307/e04643f5-d71d-499f-a452-20524d3ff706)
 
-
+Other : [MaNolJa 화면 구성] (https://github.com/dltldud2kr/jsp_hotel_booking/wiki)
 
 ---
 
