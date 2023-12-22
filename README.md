@@ -6,13 +6,21 @@
 - Docker
 - Cloudflare 
 
-## 팀원 소개
-- 이승열, #이시영, 이우석, 이정훈, 정성윤
+---
 
-## 프로젝트 개요
+
+## 팀원 소개
+- 이승열, **이시영**, 이우석, 이정훈, 정성윤
+
+---
+
 
 ## DB 구조 이미지
 ![erd캡처](https://github.com/dltldud2kr/jsp_hotel_booking/assets/105353307/776212d0-019f-4fea-85c3-94de2eb293c4)
+
+
+---
+
 
 
 ## PPT 자료 캡쳐본 
