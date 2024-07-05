@@ -31,7 +31,7 @@
 
 
 ### ⭐ DB 구조 이미지
-![erd캡처](https://github.com/dltldud2kr/jsp_hotel_booking/assets/105353307/776212d0-019f-4fea-85c3-94de2eb293c4)
+![erd캡처1](https://github.com/dltldud2kr/jsp_hotel_booking/assets/105353307/776212d0-019f-4fea-85c3-94de2eb293c4)
 
 
 ---
